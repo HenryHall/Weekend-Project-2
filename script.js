@@ -36,8 +36,8 @@ function docReady() {
 
 function createClassmate() {
   console.log("Classmate Created!");
-  $('#profiles').append("<div><img style='height:500px; width: 375px' id='imgClassmate'><p id='infoClassmate'></p><button id='previousClassmate'>Previous Classmate</button><button id='nextClassmate'>Next Classmate</button></div>");
-  $('#imgClassmate').ready().css("background-image", "url('http://www.fillmurray.com/375/500')");
+  $('#profile').append("<div><img id='imgClassmate' class='img-responsive'><p id='infoClassmate'></p><button id='previousClassmate'>Previous Classmate</button><button id='nextClassmate'>Next Classmate</button></div>");
+  $('#imgClassmate').ready().css("background-image", "url(Nu/" + classJson.students[classIndex].first_name + classJson.students[classIndex].last_name + ".jpg)");
   $('#infoClassmate').text(classJson.students[classIndex].first_name + " " + classJson.students[classIndex].last_name);
 
   $('#previousClassmate').click(function() {

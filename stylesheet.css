@@ -1,0 +1,14 @@
+h1 {
+  margin: 50px auto;
+}
+
+#imgClassmate {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height:300px;
+  width: 450px;
+}
+
+#profile {
+  margin:100px auto;
+}
