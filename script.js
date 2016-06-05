@@ -8,7 +8,7 @@ var slideShowDirection = "next";
 $(document).ready(function() {
 
      $.ajax({
-       url: 'https://raw.githubusercontent.com/devjanaprime/2.4-jQueryAjaxJSON/master/students.json',
+       url: 'https://raw.githubusercontent.com/HenryHall/Weekend-Project-2/master/students.json',
        dataType: 'json',
        success: function( data ){
           console.log( 'in ajax success' );
