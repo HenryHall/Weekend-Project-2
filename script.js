@@ -1,6 +1,6 @@
 var classJson;
 var classIndex = 0;
-var slideShowTimer = 3000;
+var slideShowTimer = 10000;
 var timer;
 var slideShowDirection = "next";
 
