@@ -1,7 +1,8 @@
 var classJson;
 var classIndex = 0;
-var slideShowTimer = 10000;
+var slideShowTimer = 3000;
 var timer;
+var slideShowDirection = "next";
 
 
 $(document).ready(function() {
@@ -42,9 +43,14 @@ function createClassmate() {
 
   timer = setTimeout(function() {
     console.log("Timer End");
-    if (classIndex == classJson.students.length-1) {classIndex = -1;}
     $('#newDiv').remove();
-    classIndex++;
+    if (slideShowDirection == "next") {
+      if (classIndex == classJson.students.length-1) {classIndex = -1;}
+      classIndex++;
+    } else if (slideShowDirection == "prev") {
+      if (classIndex == 0) {classIndex = classJson.students.length;}
+      classIndex--;
+    }
     createClassmate();
   }, slideShowTimer);
 
@@ -53,6 +59,7 @@ function createClassmate() {
     $('#imgClassmate').fadeOut(1000, function() {
       if (classIndex == 0) {classIndex = classJson.students.length;}
       $('#newDiv').remove();
+      slideShowDirection = "prev";
       classIndex--;
       clearTimeout(timer);
       createClassmate();
@@ -65,6 +72,7 @@ function createClassmate() {
     $('#imgClassmate').fadeOut(1000, function() {
       if (classIndex == classJson.students.length-1) {classIndex = -1;}
       $('#newDiv').remove();
+      slideShowDirection = "next";
       classIndex++;
       clearTimeout(timer);
       createClassmate();
