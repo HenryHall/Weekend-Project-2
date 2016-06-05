@@ -1,6 +1,6 @@
 var classJson;
 var classIndex = 0;
-var slideShowTimer = 10000;
+var slideShowTimer = 10000; //How often the new classmate will appear automatically
 var timer;
 var slideShowDirection = "next";
 
@@ -41,6 +41,17 @@ function createClassmate() {
   $('#infoClassmate').text(classJson.students[classIndex].first_name + " " + classJson.students[classIndex].last_name);
   $('#currentClassmate').text("(" + Number(classIndex + 1) + "/20)");
 
+  //Makes ugly info
+  // $('#newDiv').append("<p id='city'></p><p id='shoutout'></p>")
+  // $('#city').text(classJson.students[classIndex].city);
+  // $('#shoutout').text(classJson.students[classIndex].shoutout);
+
+  //Makes ugly buttons
+  // for (var i = 0; i < classJson.students.length; i++) {
+  //   $('#newDiv').append("<button id='buttonClassmate" + i + "'>" + classJson.students[i].first_name + " " + classJson.students[i].last_name + "</button>");
+  //   createButton(i);
+  // }
+
   timer = setTimeout(function() {
     console.log("Timer End");
     $('#newDiv').remove();
@@ -79,5 +90,17 @@ function createClassmate() {
 
     });
 
+  });
+}
+
+function createButton(iterator) {
+  $('#buttonClassmate' + iterator).click(function() {
+    $('#newDiv').remove();
+    slideShowDirection = "next";
+    console.log(classIndex + " " + iterator + " clicked");
+    classIndex = iterator;
+    console.log(classIndex + " " + iterator + " clicked2");
+    clearTimeout(timer);
+    createClassmate();
   });
 }
