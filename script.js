@@ -4,7 +4,6 @@ var classIndex = 0;
 
 $(document).ready(function() {
 
-  // $('#getJSONajax' ).click( function(){
      $.ajax({
        url: 'https://raw.githubusercontent.com/devjanaprime/2.4-jQueryAjaxJSON/master/students.json',
        dataType: 'json',
@@ -20,7 +19,6 @@ $(document).ready(function() {
           } // end 404
          } // end statusCode
        }); // end ajax  object
-  // }); // end click getJSONAjax button
 
 
 
