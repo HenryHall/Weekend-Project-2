@@ -50,9 +50,9 @@ function createClassmate() {
 
   $('#previousClassmate').click(function() {
 
-    $('#newDiv').fadeOut(1000, function() {
+    $('#imgClassmate').fadeOut(1000, function() {
       if (classIndex == 0) {classIndex = classJson.students.length;}
-      $('newDiv').remove();
+      $('#newDiv').remove();
       classIndex--;
       clearTimeout(timer);
       createClassmate();
