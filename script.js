@@ -1,10 +1,12 @@
 var classJson;
 var classIndex = 0;
+var slideShowTimer = 10000;
+var timer;
+var slideShowDirection = "next";
 
 
 $(document).ready(function() {
 
-  // $('#getJSONajax' ).click( function(){
      $.ajax({
        url: 'https://raw.githubusercontent.com/devjanaprime/2.4-jQueryAjaxJSON/master/students.json',
        dataType: 'json',
@@ -20,9 +22,6 @@ $(document).ready(function() {
           } // end 404
          } // end statusCode
        }); // end ajax  object
-  // }); // end click getJSONAjax button
-
-
 
 });
 
@@ -36,21 +35,49 @@ function docReady() {
 
 function createClassmate() {
   console.log("Classmate Created!");
-  $('#profile').append("<div><img id='imgClassmate' class='img-responsive'><p id='infoClassmate'></p><button id='previousClassmate'>Previous Classmate</button><button id='nextClassmate'>Next Classmate</button></div>");
+
+  $('#profile').append("<div id='newDiv'><img id='imgClassmate' class='img-responsive'><p id='infoClassmate'></p><p id='currentClassmate'></p><button id='previousClassmate'>Previous Classmate</button><button id='nextClassmate'>Next Classmate</button></div>");
   $('#imgClassmate').ready().css("background-image", "url(Nu/" + classJson.students[classIndex].first_name + classJson.students[classIndex].last_name + ".jpg)");
   $('#infoClassmate').text(classJson.students[classIndex].first_name + " " + classJson.students[classIndex].last_name);
+  $('#currentClassmate').text("(" + Number(classIndex + 1) + "/20)");
+
+  timer = setTimeout(function() {
+    console.log("Timer End");
+    $('#newDiv').remove();
+    if (slideShowDirection == "next") {
+      if (classIndex == classJson.students.length-1) {classIndex = -1;}
+      classIndex++;
+    } else if (slideShowDirection == "prev") {
+      if (classIndex == 0) {classIndex = classJson.students.length;}
+      classIndex--;
+    }
+    createClassmate();
+  }, slideShowTimer);
 
   $('#previousClassmate').click(function() {
-    if (classIndex == 0) {return;}
-    $(this).parent().remove();
-    classIndex--;
-    createClassmate();
+
+    $('#imgClassmate').fadeOut(1000, function() {
+      if (classIndex == 0) {classIndex = classJson.students.length;}
+      $('#newDiv').remove();
+      slideShowDirection = "prev";
+      classIndex--;
+      clearTimeout(timer);
+      createClassmate();
+    });
+
   });
 
   $('#nextClassmate').click(function() {
-    if (classIndex == classJson.students.length-1) {return;}
-    $(this).parent().remove();
-    classIndex++;
-    createClassmate();
+
+    $('#imgClassmate').fadeOut(1000, function() {
+      if (classIndex == classJson.students.length-1) {classIndex = -1;}
+      $('#newDiv').remove();
+      slideShowDirection = "next";
+      classIndex++;
+      clearTimeout(timer);
+      createClassmate();
+
+    });
+
   });
 }
